@@ -24,7 +24,7 @@ $PYTHON_ENV_DIR/bin/pip install -r $APP_DIR/requirements.txt
 # 3. Update the systemd service file with the correct paths
 print_message "Updating the systemd service file with the correct paths..."
 sed -i "s|WorkingDirectory=.*|WorkingDirectory=$APP_DIR|g" $APP_DIR/$SERVICE_NAME
-sed -i "s|ExecStart=.*|ExecStart=$PYTHON_ENV_DIR/bin/python -m uvicorn main:app --host 0.0.0.0 --port 8000|g" $APP_DIR/$SERVICE_NAME
+sed -i "s|ExecStart=.*|ExecStart=$PYTHON_ENV_DIR/bin/python -m uvicorn app:app --host 0.0.0.0 --port 8081|g" $APP_DIR/$SERVICE_NAME
 
 # 4. Copy the updated service file to the systemd directory
 print_message "Configuring the systemd service..."
