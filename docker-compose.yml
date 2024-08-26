@@ -1,0 +1,7 @@
+services:
+  raspberrypi-info:
+    build: .
+    container_name: raspberrypi-info
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
