@@ -12,8 +12,8 @@ This repository contains a simple FastAPI application that provides system infor
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git  
-   cd your-repo-name
+   git https://github.com/diegogliarte/raspberrypi-info.git
+   cd raspberrypi-info
    ```
 
 ## Running the Application
@@ -21,7 +21,7 @@ This repository contains a simple FastAPI application that provides system infor
 To build and run the FastAPI application, use Docker Compose:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 This command will build the Docker image and start the container in detached mode.
@@ -31,7 +31,7 @@ This command will build the Docker image and start the container in detached mod
 To stop and remove the FastAPI container, use:
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ## Usage
