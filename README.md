@@ -1,4 +1,4 @@
-# FastAPI Application on Raspberry Pi
+# RaspberryPI Info
 
 This repository contains a simple FastAPI application that provides system information about the Raspberry Pi it is hosted on. The application is containerized using Docker and can be easily deployed using Docker Compose.
 
