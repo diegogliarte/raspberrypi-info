@@ -18,25 +18,54 @@ This repository contains a simple FastAPI application that provides system infor
    cd raspberrypi-info
    ```
 
-2. **Install Python dependencies**:
+2. **Create a Python virtual environment**:
 
-   Install the necessary Python packages from `requirements.txt`:
+   It's a good practice to use a virtual environment to manage dependencies. Create and activate a virtual environment in the project directory:
 
    ```
-   pip3 install -r requirements.txt
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+3. **Install Python dependencies**:
+
+   With the virtual environment activated, install the necessary Python packages from `requirements.txt`:
+
+   ```
+   pip install -r requirements.txt
    ```
 
 ## Running the Application as a Systemd Service
 
-1. **Move the service file to the systemd directory**:
+1. **Modify the service file to use the virtual environment**:
 
-   Ensure the `.service` file from the repository is copied to the correct directory:
+   Ensure the `.service` file references the virtual environment's Python executable. Open the `raspberrypi-info.service` file and modify it to point to the correct `ExecStart` path:
+
+   ```
+   [Unit]
+   Description=Raspberry Pi Info Service
+   After=network.target
+
+   [Service]
+   WorkingDirectory=/path/to/raspberrypi-info
+   ExecStart=/path/to/raspberrypi-info/venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port 8000
+   Restart=always
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+   Make sure to replace `/path/to/raspberrypi-info` with the actual path to your project directory.
+
+2. **Move the service file to the systemd directory**:
+
+   Copy the modified `.service` file to the systemd directory:
 
    ```
    sudo cp raspberrypi-info.service /etc/systemd/system/
    ```
 
-2. **Enable and Start the Service**:
+3. **Enable and Start the Service**:
 
    After moving the service file, reload the systemd daemon, enable the service, and start it:
 
@@ -46,7 +75,7 @@ This repository contains a simple FastAPI application that provides system infor
    sudo systemctl start raspberrypi-info.service
    ```
 
-3. **Verify the Service**:
+4. **Verify the Service**:
 
    Check if the service is running correctly:
 
@@ -75,3 +104,4 @@ Once the application is running as a service, you can access the FastAPI endpoin
 - Open your web browser and navigate to: `http://localhost:8081/info`
 
 This will return a JSON object with system information such as CPU count, memory usage, and temperature.
+
