@@ -3,8 +3,9 @@ Description=Raspberry Pi Info Service
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/raspberrypi-info
-ExecStart=/opt/raspberrypi-info/venv/bin/python -m uvicorn app:app --host 0.0.0.0 --port 8081
+# These lines will be replaced by the setup.sh script with the actual paths
+WorkingDirectory=/path/to/your/repo
+ExecStart=/path/to/your/venv/bin/python -m uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
 
 [Install]
